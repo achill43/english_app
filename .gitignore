@@ -1,0 +1,14 @@
+.venv
+.data
+.idea
+.zed
+.vscode
+.env
+test.db
+var
+.pytest_cache
+htmlcov
+*/__pycache__
+__pycache__
+celerybeat-schedule
+chambers
