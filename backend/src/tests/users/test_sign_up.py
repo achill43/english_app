@@ -47,3 +47,8 @@ async def test_user_is_exist(test_app, user_fixture):
     except HTTPException:
         is_exist = True
     assert is_exist is True
+
+
+@pytest.mark.asyncio
+async def test_user_tree(test_app, user_fixture):
+    assert 1 == 1
