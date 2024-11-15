@@ -12,8 +12,7 @@ from injector_setup import injector_setup
 from pydiator_core.mediatr import Mediatr
 from pydiator_setup import setup_pydiator
 from schemas.users import UserResponse
-from sqlalchemy.ext.asyncio import (AsyncSession, async_sessionmaker,
-                                    create_async_engine)
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from use_cases.users.create_user import CreateUserRequest, CreateUserResponse
 
 DATABASE_URL = "sqlite+aiosqlite:///./test.db"
