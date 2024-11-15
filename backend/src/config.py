@@ -1,12 +1,12 @@
 import os
 
-from pydantic import AnyHttpUrl, ConfigDict, field_validator
+from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "ckeckbox_test"
-    BACKEND_CORS_ORIGINS: list[AnyHttpUrl] = os.environ.get(
+    BACKEND_CORS_ORIGINS: list[str] = os.environ.get(  # type: ignore
         "BACKEND_CORS_ORIGINS",
         [
             "http://localhost:8000",
@@ -26,8 +26,6 @@ class Settings(BaseSettings):
     DB_HOST: str = os.environ.get("DB_HOST", "database")
     DB_PORT: int = int(os.environ.get("DB_PORT", 5432))
 
-    IS_TEST_DATABASE: bool = os.environ.get("IS_TEST_DATABASE", False)
-
     DATABASE_URL: str = (
         f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
     )
@@ -35,22 +33,22 @@ class Settings(BaseSettings):
 
     REDIS_URL: str = os.environ.get("REDIS_URL", "redis://:redispass@redis:6379/0")
 
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = os.environ.get(
-        "ACCESS_TOKEN_EXPIRE_MINUTES", int(60 * 24)
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = int(
+        os.environ.get("ACCESS_TOKEN_EXPIRE_MINUTES", int(60 * 24))
     )  # 1 day
-    REFRESH_TOKEN_EXPIRE_MINUTES: int = os.environ.get(
-        "REFRESH_TOKEN_EXPIRE_MINUTES", int(60 * 24 * 7)
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = int(
+        os.environ.get("REFRESH_TOKEN_EXPIRE_MINUTES", int(60 * 24 * 7))
     )  # 7 days
-    ADMIN_TOKEN_EXPIRE_MINUTES: int = os.environ.get(
-        "ADMIN_TOKEN_EXPIRE_MINUTES", int(60 * 24 * 7)
+    ADMIN_TOKEN_EXPIRE_MINUTES: int = int(
+        os.environ.get("ADMIN_TOKEN_EXPIRE_MINUTES", int(60 * 24 * 7))
     )  # 7 days
-    ROTATE_REFRESH_TOKEN: bool = os.environ.get("ROTATE_REFRESH_TOKEN", False)
+    ROTATE_REFRESH_TOKEN: bool = bool(os.environ.get("ROTATE_REFRESH_TOKEN", False))
     JWT_ALGORITHM: str = "HS256"
     JWT_SECRET_KEY: str = os.environ.get(
         "JWT_SECRET_KEY", "develop"
     )  # should be kept secret
 
-    class Config(ConfigDict):
+    class Config:
         case_sensitive = True
         env_file = ".env"
 

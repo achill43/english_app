@@ -27,7 +27,7 @@ def generate_token(token_data: dict) -> str:
     return token
 
 
-def decode_token(token: str) -> dict:
+def decode_token(token: str) -> dict | None:
     """Декодуємо отриманий токен"""
     try:
         decoded_token = jwt.decode(

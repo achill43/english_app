@@ -14,10 +14,6 @@ class UserSQL(Base):
     first_name: Mapped[str]
     last_name: Mapped[str]
 
-    orders: Mapped[List["models.products.OrderSQL"]] = relationship(
-        back_populates="user"
-    )
-
     def __repr__(self) -> str:
         return f"<User id={self.id} email={self.email}>"
 

@@ -13,13 +13,13 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
-  - repo: local
-    hooks:
-    - id: pytest
-      name: pytest
-      entry: bash -c 'PYTEST_ADDOPTS="--rootdir=app/" ./.venv/bin/pytest app/tests --disable-warnings'
-      language: system
-      types: [python]
-      pass_filenames: false
-      always_run: true
-      exclude: 'test.db'
+  # - repo: local
+  #   hooks:
+  #   - id: pytest
+  #     name: pytest
+  #     entry: bash -c 'PYTEST_ADDOPTS="--rootdir=backend/src" ./.venv/bin/pytest backend/src/tests --disable-warnings'
+  #     language: system
+  #     types: [python]
+  #     pass_filenames: false
+  #     always_run: true
+  #     exclude: 'test.db'

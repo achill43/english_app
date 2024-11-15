@@ -5,9 +5,7 @@ from fastapi import HTTPException, status
 from injector import Inject
 from models.users import UserSQL
 from pydantic import BaseModel, model_validator
-from pydiator_core.interfaces import BaseResponse
-from pydiator_core.mediatr import BaseRequest
-from pydiator_core.mediatr_container import BaseHandler
+from pydiator_core.interfaces import BaseHandler, BaseRequest, BaseResponse
 from repositories.user_repository import UserRepository
 from schemas.users import SessionReponce, UserResponse
 from utils.jwt_token import generate_token, generate_token_data
@@ -41,7 +39,7 @@ class CreateUserHandler(BaseHandler):
         self.user_repository = user_repository
         self._settings = settings
 
-    async def handle(self, req: CreateUserRequest) -> CreateUserResponse:
+    async def handle(self, req: CreateUserRequest) -> CreateUserResponse:  # type: ignore
         user = await self.user_repository.get_user_by_email(email=req.email)
         if user:
             raise HTTPException(
