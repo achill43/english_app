@@ -17,9 +17,8 @@ repos:
   #   hooks:
   #   - id: pytest
   #     name: pytest
-  #     entry: bash -c 'PYTEST_ADDOPTS="--rootdir=backend/src" ./.venv/bin/pytest backend/src/tests --disable-warnings'
+  #     entry: bash -c 'PYTHONPATH=./backend/src ./.venv/bin/pytest --asyncio-mode=auto --rootdir=./backend/src --disable-warnings backend/src/tests'
   #     language: system
   #     types: [python]
   #     pass_filenames: false
   #     always_run: true
-  #     exclude: 'test.db'
