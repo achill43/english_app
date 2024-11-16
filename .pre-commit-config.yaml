@@ -13,12 +13,15 @@ repos:
     rev: 5.12.0
     hooks:
       - id: isort
-  # - repo: local
-  #   hooks:
-  #   - id: pytest
-  #     name: pytest
-  #     entry: bash -c 'PYTHONPATH=./backend/src ./.venv/bin/pytest --asyncio-mode=auto --rootdir=./backend/src --disable-warnings backend/src/tests'
-  #     language: system
-  #     types: [python]
-  #     pass_filenames: false
-  #     always_run: true
+  - repo: local
+    hooks:
+    - id: pytest
+      name: pytest
+      entry: bash -c '
+        docker start english_app-backend-1 || true &&
+        docker exec english_app-backend-1 pytest --asyncio-mode=auto --disable-warnings tests/'
+      language: system
+      types: [python]
+      pass_filenames: false
+      always_run: true
+
