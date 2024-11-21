@@ -4,7 +4,7 @@ from config import Settings
 from fastapi import HTTPException, status
 from injector import Inject
 from models.users import UserSQL
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, EmailStr, model_validator
 from pydiator_core.interfaces import BaseHandler, BaseRequest, BaseResponse
 from repositories.user_repository import UserRepository
 from schemas.users import SessionReponce, UserResponse
@@ -13,7 +13,7 @@ from utils.password import get_hashed_password
 
 
 class CreateUserRequest(BaseModel, BaseRequest):
-    email: str
+    email: EmailStr
     first_name: str
     last_name: str
     password: str

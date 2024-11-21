@@ -3,6 +3,7 @@ from typing import cast
 import pytest
 from fastapi import HTTPException
 from models.users import UserSQL
+from pydantic_core._pydantic_core import ValidationError
 from sqlalchemy import select
 from use_cases.users.create_user import CreateUserRequest, CreateUserResponse
 
@@ -37,7 +38,7 @@ async def test_user_is_exist(test_app, user_fixture):
     try:
         await pydiator.send(
             req=CreateUserRequest(
-                email=user_fixture.email,
+                email=str(user_fixture.email),
                 first_name="Test",
                 last_name="Test",
                 password="String1234",
@@ -50,5 +51,19 @@ async def test_user_is_exist(test_app, user_fixture):
 
 
 @pytest.mark.asyncio
-async def test_user_tree(test_app, user_fixture):
-    assert 1 == 1
+async def test_user_wrong_email(test_app):
+    _, _, pydiator = test_app
+    is_exist = False
+    try:
+        await pydiator.send(
+            req=CreateUserRequest(
+                email="wrong_email_format",
+                first_name="Test",
+                last_name="Test",
+                password="String1234",
+                r_password="String1234",
+            )
+        )
+    except ValidationError:
+        is_exist = True
+    assert is_exist is True

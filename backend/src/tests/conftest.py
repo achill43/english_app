@@ -9,6 +9,7 @@ from fastapi_injector import InjectorMiddleware, attach_injector, request_scope
 from fastapi_injector.request_scope import RequestScope, _request_id_ctx
 from injector import Injector
 from injector_setup import injector_setup
+from pydantic import EmailStr
 from pydiator_core.mediatr import Mediatr
 from pydiator_setup import setup_pydiator
 from schemas.users import UserResponse
