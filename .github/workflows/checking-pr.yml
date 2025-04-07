@@ -1,0 +1,52 @@
+name: Checking pull request before merge it
+
+on:
+  pull_request:
+  on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - develop
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:24.0.6
+        options: --privileged
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bash curl
+
+      - name: Set up Poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.8.2
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Start Docker containers
+        run: docker compose up -d
+        env:
+          COMPOSE_PROFILES: test
+
+      - name: Install pre-commit
+        run: poetry run pip install pre-commit
+
+      - name: Run pre-commit hooks
+        run: poetry run pre-commit run --all-files
