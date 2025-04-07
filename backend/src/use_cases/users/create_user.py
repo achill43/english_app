@@ -8,6 +8,8 @@ from pydantic import BaseModel, EmailStr, model_validator
 from pydiator_core.interfaces import BaseHandler, BaseRequest, BaseResponse
 from repositories.user_repository import UserRepository
 from schemas.users import SessionReponce, UserResponse
+
+# from utils.email import send_email
 from utils.jwt_token import generate_token, generate_token_data
 from utils.password import get_hashed_password
 
@@ -66,6 +68,12 @@ class CreateUserHandler(BaseHandler):
             token_type="refresh",
         )
         refresh_token = generate_token(token_data=token_data)
+        # send_email(
+        #     subject="Welcome to the club",
+        #     body=f"Hello {user.first_name},\n\nWelcome to the club.\n\nBest regards,\n\nThe Club",
+        #     sender="sergei.ahill@gmail.com",
+        #     recipients=[user.email],
+        # )
         return CreateUserResponse(
             user=UserResponse.from_orm(user),
             session=SessionReponce(

@@ -29,8 +29,5 @@ services:
     networks:
       - checkbox
 
-volumes:
-  checkbox:
-
 networks:
   checkbox:

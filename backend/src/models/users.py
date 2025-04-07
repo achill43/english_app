@@ -1,8 +1,5 @@
-from typing import List
-
-import models
 from db import Base
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 
 class UserSQL(Base):

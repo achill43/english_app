@@ -9,6 +9,7 @@ WORKDIR /src
 
 COPY ./backend/src /src
 COPY pyproject.toml poetry.lock ./
+COPY README.md /src
 
 RUN apt-get update && apt-get install -y gcc libffi-dev g++
 RUN pip install "poetry"
