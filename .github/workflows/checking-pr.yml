@@ -1,7 +1,13 @@
-name: Pre-commit checks
+name: Checking pull request before merge it
 
 on:
   pull_request:
+  on:
+  pull_request:
+    branches:
+      - master
+      - main
+      - develop
 
 jobs:
   pre-commit:
