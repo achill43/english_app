@@ -53,5 +53,4 @@ jobs:
           
       - name: Run Flake8
         run: |
-          cd backend
-          flake8 --config ../.flake8
+          flake8 --config .flake8
