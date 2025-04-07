@@ -2,7 +2,6 @@ from typing import cast
 from uuid import uuid4
 
 import pytest
-from jwt.exceptions import DecodeError
 from models.users import UserSQL
 from sqlalchemy import select
 from utils.jwt_token import decode_token, generate_token, generate_token_data
