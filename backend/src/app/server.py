@@ -23,7 +23,7 @@ def init_app():
 
     injector = injector_setup(app=_app)
     attach_injector(_app, injector)
-    pydiator = setup_pydiator(injector)
+    setup_pydiator(injector)
 
     # Middlewares
     _app.add_middleware(InjectorMiddleware, injector=injector)

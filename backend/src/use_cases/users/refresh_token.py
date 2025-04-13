@@ -1,12 +1,10 @@
-from uuid import uuid4
-
 from config import Settings
 from fastapi import HTTPException, status
 from injector import Inject
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from pydiator_core.interfaces import BaseHandler, BaseRequest, BaseResponse
 from repositories.user_repository import UserRepository
-from schemas.users import SessionReponce, UserResponse
+from schemas.users import SessionReponce
 from utils.jwt_token import (
     check_expired_token,
     decode_token,
